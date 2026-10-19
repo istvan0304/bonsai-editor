@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="hu">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bonsai Editor – Standalone</title>
+  </head>
+  <body>
+    <h1>Standalone IIFE (build után)</h1>
+    <p>Futtasd: <code>npm run build</code>, majd szolgáld ki a <code>dist/</code> mappát.</p>
+    <div id="editor"></div>
+    <script src="../dist/bonsai-editor.standalone.iife.js"></script>
+    <script>
+      new BonsaiEditor({
+        element: document.querySelector('#editor'),
+        content: '<p>CDN / script tag mód</p>',
+        toolbar: true,
+        onUpdate: (v) => console.log(v),
+      })
+    </script>
+  </body>
+</html>

@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="hu">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bonsai Editor – Demó</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --page-bg: #eef2f7;
+        --card-bg: #ffffff;
+        --text: #0f172a;
+        --muted: #64748b;
+        --accent: #2563eb;
+        --border: #e2e8f0;
+        --code-bg: #0f172a;
+        --code-fg: #e2e8f0;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --page-bg: #0b1220;
+          --card-bg: #151f32;
+          --text: #f1f5f9;
+          --muted: #94a3b8;
+          --border: #334155;
+          --code-bg: #020617;
+          --code-fg: #cbd5e1;
+        }
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, sans-serif;
+        background: var(--page-bg);
+        color: var(--text);
+        line-height: 1.5;
+      }
+
+      .page {
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 1.5rem 1.25rem 3rem;
+      }
+
+      .hero {
+        margin-bottom: 1.5rem;
+      }
+
+      .hero h1 {
+        margin: 0 0 0.35rem;
+        font-size: clamp(1.5rem, 4vw, 2rem);
+        letter-spacing: -0.02em;
+      }
+
+      .hero p {
+        margin: 0;
+        color: var(--muted);
+        max-width: 52rem;
+      }
+
+      .badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 1rem;
+      }
+
+      .badge {
+        font-size: 0.75rem;
+        padding: 0.25rem 0.65rem;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        background: var(--card-bg);
+        color: var(--muted);
+      }
+
+      .layout {
+        display: grid;
+        gap: 1.25rem;
+      }
+
+      @media (min-width: 900px) {
+        .layout--main {
+          grid-template-columns: 1.2fr 0.8fr;
+          align-items: start;
+        }
+      }
+
+      .card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 0.875rem;
+        padding: 1.25rem;
+        box-shadow: 0 1px 2px rgb(15 23 42 / 6%);
+      }
+
+      .card h2 {
+        margin: 0 0 0.25rem;
+        font-size: 1.05rem;
+      }
+
+      .card .hint {
+        margin: 0 0 1rem;
+        font-size: 0.875rem;
+        color: var(--muted);
+      }
+
+      .panel-head {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .panel-head label {
+        font-size: 0.8125rem;
+        color: var(--muted);
+      }
+
+      .panel-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        align-items: center;
+      }
+
+      .btn {
+        appearance: none;
+        border: 1px solid var(--border);
+        background: var(--card-bg);
+        color: inherit;
+        font-size: 0.8125rem;
+        padding: 0.35rem 0.75rem;
+        border-radius: 0.375rem;
+        cursor: pointer;
+      }
+
+      .btn:hover {
+        border-color: var(--accent);
+      }
+
+      .btn--primary {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #fff;
+      }
+
+      .theme-picker {
+        display: flex;
+        gap: 0.35rem;
+      }
+
+      .theme-picker button {
+        width: 1.5rem;
+        height: 1.5rem;
+        border-radius: 999px;
+        border: 2px solid var(--card-bg);
+        box-shadow: 0 0 0 1px var(--border);
+        cursor: pointer;
+        padding: 0;
+      }
+
+      .theme-picker button.is-active {
+        box-shadow: 0 0 0 2px var(--accent);
+      }
+
+      .output-wrap {
+        position: relative;
+      }
+
+      .output {
+        margin: 0;
+        padding: 0.85rem 1rem;
+        background: var(--code-bg);
+        color: var(--code-fg);
+        border-radius: 0.5rem;
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 0.75rem;
+        overflow: auto;
+        max-height: min(420px, 50vh);
+        white-space: pre-wrap;
+        word-break: break-word;
+        min-height: 8rem;
+      }
+
+      .tabs {
+        display: flex;
+        gap: 0.35rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .tabs button {
+        border: 1px solid var(--border);
+        background: transparent;
+        color: inherit;
+        padding: 0.35rem 0.75rem;
+        border-radius: 0.375rem;
+        cursor: pointer;
+        font-size: 0.8125rem;
+      }
+
+      .tabs button.is-active {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #fff;
+      }
+
+      .grid-2 {
+        display: grid;
+        gap: 1.25rem;
+      }
+
+      @media (min-width: 720px) {
+        .grid-2 {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      .error-banner {
+        display: none;
+        padding: 1rem;
+        background: #fef2f2;
+        color: #991b1b;
+        border: 1px solid #fecaca;
+        border-radius: 0.5rem;
+        margin-bottom: 1.25rem;
+      }
+
+      .error-banner code {
+        background: rgb(0 0 0 / 6%);
+        padding: 0.1rem 0.35rem;
+        border-radius: 0.25rem;
+      }
+
+      /* Demo témák a szerkesztőhöz */
+      #editor-main.bonsai-editor.theme-ocean {
+        --bonsai-focus-color: #0891b2;
+        --bonsai-border-color: #a5f3fc;
+      }
+
+      #editor-main.bonsai-editor.theme-forest {
+        --bonsai-focus-color: #059669;
+        --bonsai-border-color: #86efac;
+      }
+
+      #editor-main.bonsai-editor.theme-plum {
+        --bonsai-focus-color: #9333ea;
+        --bonsai-border-color: #d8b4fe;
+      }
+
+      bonsai-editor {
+        display: block;
+      }
+
+      footer {
+        margin-top: 1.5rem;
+        font-size: 0.8125rem;
+        color: var(--muted);
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header class="hero">
+        <h1>Bonsai Editor demó</h1>
+        <p>
+          Fejlesztői demó – a <code>src/</code> módosításai azonnal látszanak. Ikonos eszköztár (Word-szerű), HTML vagy JSON
+          kimenet, Web Component. A toolbar gombok fölé húzva tooltip jelenik meg.
+        </p>
+        <div class="badges">
+          <span class="badge">Vanilla JS</span>
+          <span class="badge">Vue nélkül</span>
+          <span class="badge">TipTap v3</span>
+          <span class="badge">Toolbar ikonok</span>
+        </div>
+      </header>
+
+      <div id="build-error" class="error-banner" role="alert" hidden>
+        Nem található a standalone build. Futtasd: <code>npm run build</code>, majd
+        <code>npm run demo:static</code>.
+      </div>
+
+      <div class="layout layout--main">
+        <section class="card">
+          <h2>Fő szerkesztő</h2>
+          <p class="hint">Programozott API · toolbar · placeholder · élő kimenet</p>
+          <div id="editor-main"></div>
+        </section>
+
+        <section class="card">
+          <div class="panel-head">
+            <label for="out-main">Kimenet (<span id="format-label">HTML</span>)</label>
+            <div class="panel-actions">
+              <div class="tabs" role="tablist" aria-label="Kimeneti formátum">
+                <button type="button" class="is-active" data-format="html" role="tab" aria-selected="true">
+                  HTML
+                </button>
+                <button type="button" data-format="json" role="tab" aria-selected="false">JSON</button>
+              </div>
+              <button type="button" class="btn" id="copy-main">Másolás</button>
+            </div>
+          </div>
+          <div class="panel-head">
+            <label>Téma</label>
+            <div class="theme-picker" aria-label="Szerkesztő téma">
+              <button type="button" class="is-active" data-theme="default" title="Alapértelmezett" style="background: #fff"></button>
+              <button type="button" data-theme="ocean" title="Ocean" style="background: #cffafe"></button>
+              <button type="button" data-theme="forest" title="Forest" style="background: #bbf7d0"></button>
+              <button type="button" data-theme="plum" title="Plum" style="background: #e9d5ff"></button>
+            </div>
+          </div>
+          <div class="output-wrap">
+            <pre id="out-main" class="output" aria-label="Kimenet"></pre>
+          </div>
+        </section>
+      </div>
+
+      <div class="grid-2" style="margin-top: 1.25rem">
+        <section class="card">
+          <h2>Web Component</h2>
+          <p class="hint"><code>&lt;bonsai-editor&gt;</code> · <code>bonsai-update</code></p>
+          <bonsai-editor
+            id="wc"
+            toolbar
+            placeholder="Deklaratív szerkesztő…"
+            output-format="html"
+          ></bonsai-editor>
+          <pre id="out-wc" class="output" style="margin-top: 0.75rem" aria-label="WC kimenet"></pre>
+        </section>
+
+        <section class="card">
+          <h2>JSON mód</h2>
+          <p class="hint"><code>outputFormat: 'json'</code> – strukturált dokumentum</p>
+          <div id="editor-json"></div>
+          <pre id="out-json" class="output" style="margin-top: 0.75rem" aria-label="JSON kimenet"></pre>
+        </section>
+      </div>
+
+      <footer>
+        Fejlesztés: <code>npm run demo</code> (automatikus frissítés) · Buildelt előnézet:
+        <code>npm run demo:static</code>
+      </footer>
+    </div>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

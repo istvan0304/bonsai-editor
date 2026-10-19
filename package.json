@@ -1,0 +1,89 @@
+{
+  "name": "bonsai-editor",
+  "version": "0.1.0",
+  "description": "Modular, framework-agnostic rich text editor built on TipTap",
+  "type": "module",
+  "license": "MIT",
+  "main": "./dist/bonsai-editor.cjs",
+  "module": "./dist/bonsai-editor.js",
+  "types": "./dist/index.d.ts",
+  "unpkg": "./dist/bonsai-editor.standalone.iife.js",
+  "jsdelivr": "./dist/bonsai-editor.standalone.iife.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/bonsai-editor.js",
+      "require": "./dist/bonsai-editor.cjs"
+    },
+    "./element": {
+      "types": "./dist/element.d.ts",
+      "import": "./dist/element.js",
+      "require": "./dist/element.cjs"
+    },
+    "./vue": {
+      "types": "./dist/vue.d.ts",
+      "import": "./dist/vue.js",
+      "require": "./dist/vue.cjs"
+    },
+    "./standalone": "./dist/bonsai-editor.standalone.js",
+    "./style.css": "./dist/bonsai-editor.css"
+  },
+  "sideEffects": [
+    "*.css",
+    "./dist/element.*"
+  ],
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "vite --config vite.config.dev.js",
+    "demo": "vite --config vite.config.demo.js",
+    "demo:static": "npm run build && node scripts/demo.mjs",
+    "build": "node scripts/build-lib.mjs && vite build --config vite.config.standalone.js && npm run build:types",
+    "build:types": "tsc -p tsconfig.types.json",
+    "test": "vitest run",
+    "verify": "node scripts/verify-package.mjs",
+    "ci": "npm run lint && npm test && npm run build && npm run verify",
+    "lint": "eslint src tests"
+  },
+  "peerDependencies": {
+    "vue": "^3.3.0"
+  },
+  "peerDependenciesMeta": {
+    "vue": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "@tiptap/core": "^3.32.0",
+    "@tiptap/extension-font-family": "^3.32.0",
+    "@tiptap/extension-image": "^3.32.0",
+    "@tiptap/extension-link": "^3.32.0",
+    "@tiptap/extension-subscript": "^3.32.0",
+    "@tiptap/extension-superscript": "^3.32.0",
+    "@tiptap/extension-table": "^3.32.0",
+    "@tiptap/extension-table-cell": "^3.32.0",
+    "@tiptap/extension-table-header": "^3.32.0",
+    "@tiptap/extension-table-row": "^3.32.0",
+    "@tiptap/extension-text-align": "^3.32.0",
+    "@tiptap/extension-text-style": "^3.32.0",
+    "@tiptap/extension-youtube": "^3.32.0",
+    "@tiptap/extensions": "^3.32.0",
+    "@tiptap/pm": "^3.32.0",
+    "@tiptap/starter-kit": "^3.32.0",
+    "mammoth": "^1.13.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@vue/test-utils": "^2.5.1",
+    "busboy": "^1.6.0",
+    "eslint": "^10.13.0",
+    "eslint-config-prettier": "^10.1.8",
+    "jsdom": "^29.1.1",
+    "prettier": "^3.9.10",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.4",
+    "vitest": "^5.0.5",
+    "vue": "^3.5.44"
+  }
+}

@@ -1,0 +1,1743 @@
+.bonsai-editor.bonsai-editor--fullscreen,
+.bonsai-editor:fullscreen {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  max-height: 100vh;
+  border-radius: 0;
+  box-sizing: border-box;
+}
+
+.bonsai-editor.bonsai-editor--fullscreen .bonsai-editor__content,
+.bonsai-editor:fullscreen .bonsai-editor__content {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.bonsai-editor.bonsai-editor--fullscreen .bonsai-editor__prosemirror,
+.bonsai-editor:fullscreen .bonsai-editor__prosemirror {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.bonsai-editor.bonsai-editor--fullscreen .bonsai-editor__source,
+.bonsai-editor:fullscreen .bonsai-editor__source {
+  flex: 1;
+  min-height: 0;
+}
+
+.bonsai-editor.bonsai-editor--fullscreen .bonsai-editor__source-textarea,
+.bonsai-editor:fullscreen .bonsai-editor__source-textarea {
+  min-height: 0;
+}
+
+.bonsai-editor {
+  --bonsai-border-color: #d1d5db;
+  --bonsai-border-radius: 0.375rem;
+  --bonsai-focus-color: #3b82f6;
+  --bonsai-bg: #ffffff;
+  --bonsai-text-color: #111827;
+  --bonsai-font-family: ui-sans-serif, system-ui, sans-serif;
+  --bonsai-min-height: 12rem;
+  --bonsai-padding: 0.75rem 1rem;
+  --bonsai-toolbar-bg: #f9fafb;
+  --bonsai-toolbar-border: #e5e7eb;
+  --bonsai-toolbar-icon-color: #1f2937;
+  --bonsai-toolbar-icon-size: 1.25rem;
+  --bonsai-toolbar-btn-size: 2.25rem;
+
+  font-family: var(--bonsai-font-family);
+  color: var(--bonsai-text-color);
+  background: var(--bonsai-bg);
+  border: 1px solid var(--bonsai-border-color);
+  border-radius: var(--bonsai-border-radius);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.bonsai-editor:focus-within {
+  border-color: var(--bonsai-focus-color);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--bonsai-focus-color) 25%, transparent);
+}
+
+.bonsai-editor--readonly {
+  background: #f9fafb;
+}
+
+.bonsai-editor__content {
+  flex: 1;
+  min-height: var(--bonsai-min-height);
+}
+
+.bonsai-editor__source {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: var(--bonsai-min-height);
+}
+
+.bonsai-editor__source-textarea {
+  flex: 1;
+  width: 100%;
+  min-height: var(--bonsai-min-height);
+  margin: 0;
+  padding: var(--bonsai-padding);
+  border: none;
+  resize: vertical;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--bonsai-text-color);
+  background: #f8fafc;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.bonsai-editor__source-textarea:focus {
+  background: #fff;
+}
+
+.bonsai-editor--source .bonsai-editor__toolbar > button:not(.is-active) {
+  opacity: 0.45;
+}
+
+.bonsai-editor__heading-select.is-disabled,
+.bonsai-editor__font-select.is-disabled {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.bonsai-editor__source-error {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.8125rem;
+  color: #b91c1c;
+  background: #fef2f2;
+  border-top: 1px solid #fecaca;
+}
+
+.bonsai-editor__prosemirror {
+  outline: none;
+  padding: var(--bonsai-padding);
+  min-height: var(--bonsai-min-height);
+}
+
+.bonsai-editor--format-paint .bonsai-editor__prosemirror {
+  cursor: copy;
+}
+
+.bonsai-editor__prosemirror p.is-editor-empty:first-child::before,
+.bonsai-editor__placeholder::before {
+  color: #9ca3af;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+.bonsai-editor__prosemirror h1 {
+  font-size: 1.875rem;
+  font-weight: 700;
+  margin: 0.75rem 0 0.5rem;
+}
+
+.bonsai-editor__prosemirror h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0.75rem 0 0.5rem;
+}
+
+.bonsai-editor__prosemirror h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0.75rem 0 0.5rem;
+}
+
+.bonsai-editor__prosemirror h4 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 0.75rem 0 0.5rem;
+}
+
+.bonsai-editor__prosemirror h5 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0.75rem 0 0.5rem;
+}
+
+.bonsai-editor__prosemirror h6 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin: 0.75rem 0 0.5rem;
+  color: #4b5563;
+}
+
+.bonsai-editor__prosemirror ul,
+.bonsai-editor__prosemirror ol {
+  padding-left: 1.5rem;
+  margin: 0.5rem 0;
+}
+
+.bonsai-editor__prosemirror blockquote {
+  border-left: 3px solid var(--bonsai-border-color);
+  margin: 0.5rem 0;
+  padding-left: 1rem;
+  color: #4b5563;
+}
+
+.bonsai-editor__prosemirror table {
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: 100%;
+  margin: 0.75rem 0;
+  overflow: hidden;
+}
+
+.bonsai-editor__prosemirror td,
+.bonsai-editor__prosemirror th {
+  border: 1px solid var(--bonsai-border-color, #cbd5e1);
+  padding: 0.4rem 0.55rem;
+  vertical-align: top;
+  min-width: 2rem;
+  position: relative;
+}
+
+.bonsai-editor__prosemirror th {
+  background: #f1f5f9;
+  font-weight: 600;
+  text-align: left;
+}
+
+.bonsai-editor__prosemirror .selectedCell::after {
+  background: rgb(59 130 246 / 12%);
+  content: '';
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: 2;
+}
+
+.bonsai-editor__prosemirror .column-resize-handle {
+  background-color: #3b82f6;
+  bottom: -2px;
+  pointer-events: none;
+  position: absolute;
+  right: -2px;
+  top: 0;
+  width: 4px;
+}
+
+.bonsai-editor__prosemirror.resize-cursor {
+  cursor: col-resize;
+}
+
+.bonsai-editor__prosemirror pre {
+  background: #1f2937;
+  color: #f9fafb;
+  border-radius: 0.25rem;
+  padding: 0.75rem 1rem;
+  overflow-x: auto;
+  font-size: 0.875rem;
+}
+
+.bonsai-editor__prosemirror code {
+  background: #f3f4f6;
+  border-radius: 0.25rem;
+  padding: 0.125rem 0.25rem;
+  font-size: 0.875em;
+}
+
+.bonsai-editor__prosemirror sub,
+.bonsai-editor__prosemirror sup {
+  font-size: 0.75em;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+.bonsai-editor__prosemirror sub {
+  bottom: -0.25em;
+}
+
+.bonsai-editor__prosemirror sup {
+  top: -0.5em;
+}
+
+.bonsai-editor__prosemirror hr {
+  border: none;
+  border-top: 1px solid var(--bonsai-border-color);
+  margin: 1rem 0;
+}
+
+.bonsai-editor__menubar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 0;
+  padding: 0 0.25rem;
+  background: var(--bonsai-toolbar-bg);
+  border-bottom: 1px solid var(--bonsai-toolbar-border);
+  font-size: 0.8125rem;
+  line-height: 1.25;
+  position: relative;
+  z-index: 2;
+}
+
+.bonsai-editor__menubar-item {
+  position: relative;
+}
+
+.bonsai-editor__menubar-trigger {
+  display: block;
+  margin: 0;
+  padding: 0.4375rem 0.625rem;
+  border: none;
+  border-radius: 0.25rem;
+  background: transparent;
+  color: var(--bonsai-text-color);
+  font: inherit;
+  cursor: pointer;
+}
+
+.bonsai-editor__menubar-trigger:hover,
+.bonsai-editor__menubar-trigger.is-open {
+  background: color-mix(in srgb, var(--bonsai-toolbar-border) 65%, transparent);
+}
+
+.bonsai-editor__menubar-trigger:focus-visible {
+  outline: 2px solid var(--bonsai-focus-color);
+  outline-offset: -2px;
+}
+
+.bonsai-editor__menubar-panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 11rem;
+  margin: 0.125rem 0 0;
+  padding: 0.25rem 0;
+  background: var(--bonsai-bg);
+  border: 1px solid var(--bonsai-border-color);
+  border-radius: var(--bonsai-border-radius);
+  box-shadow:
+    0 4px 6px -1px rgb(0 0 0 / 0.08),
+    0 2px 4px -2px rgb(0 0 0 / 0.06);
+}
+
+.bonsai-editor__menubar-panel[hidden] {
+  display: none;
+}
+
+.bonsai-editor__menubar-action {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0.375rem 0.875rem;
+  border: none;
+  background: transparent;
+  color: var(--bonsai-text-color);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.bonsai-editor__menubar-action:hover:not(:disabled) {
+  background: var(--bonsai-toolbar-bg);
+}
+
+.bonsai-editor__menubar-action:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.bonsai-editor__menubar-action.is-active {
+  font-weight: 600;
+  color: var(--bonsai-focus-color);
+}
+
+.bonsai-editor__menubar-action:focus-visible {
+  outline: 2px solid var(--bonsai-focus-color);
+  outline-offset: -2px;
+}
+
+.bonsai-editor__menubar-sep {
+  height: 1px;
+  margin: 0.25rem 0;
+  background: var(--bonsai-toolbar-border);
+}
+
+.bonsai-editor__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.125rem;
+  padding: 0.375rem 0.5rem;
+  background: var(--bonsai-toolbar-bg);
+  border-bottom: 1px solid var(--bonsai-toolbar-border);
+}
+
+/* Csak közvetlen gyerek: ikon gombok (ne a címsor lenyíló / menü elemei) */
+.bonsai-editor__toolbar > button,
+.bonsai-editor__toolbar > .bonsai-editor__metric-control > .bonsai-editor__metric-trigger {
+  appearance: none;
+  border: 1px solid transparent;
+  background: transparent;
+  border-radius: 0.375rem;
+  padding: 0;
+  width: var(--bonsai-toolbar-btn-size);
+  height: var(--bonsai-toolbar-btn-size);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0;
+  line-height: 0;
+  flex-shrink: 0;
+  overflow: hidden;
+  transition:
+    background-color 0.12s ease,
+    border-color 0.12s ease;
+}
+
+.bonsai-editor__metric-control {
+  position: relative;
+  display: inline-flex;
+}
+
+.bonsai-editor__metric-control.is-disabled {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.bonsai-editor__metric-panel {
+  position: absolute;
+  top: calc(100% + 0.35rem);
+  left: 50%;
+  z-index: 30;
+  transform: translateX(-50%);
+  min-width: 9.5rem;
+  padding: 0.55rem;
+  border: 1px solid var(--bonsai-toolbar-border);
+  border-radius: 0.5rem;
+  background: #fff;
+  color: var(--bonsai-text-color, #0f172a);
+  color-scheme: light;
+  box-shadow:
+    0 10px 24px rgb(15 23 42 / 14%),
+    0 0 0 1px rgb(15 23 42 / 4%);
+}
+
+.bonsai-editor__metric-field {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.35rem 0.45rem;
+  align-items: center;
+  margin-bottom: 0.45rem;
+}
+
+.bonsai-editor__metric-field-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+.bonsai-editor__metric-input {
+  width: 100%;
+  min-width: 0;
+  padding: 0.3rem 0.45rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.375rem;
+  font-size: 0.8125rem;
+  line-height: 1.2;
+  color: var(--bonsai-text-color, #0f172a);
+  background: #fff;
+}
+
+.bonsai-editor__metric-input:focus {
+  outline: 2px solid #93c5fd;
+  outline-offset: 0;
+  border-color: #60a5fa;
+}
+
+.bonsai-editor__metric-unit {
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+.bonsai-editor__metric-reset {
+  appearance: none;
+  width: 100%;
+  padding: 0.35rem 0.45rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.375rem;
+  background: #f1f5f9;
+  color: #0f172a;
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.3;
+  cursor: pointer;
+}
+
+.bonsai-editor__metric-reset:hover {
+  background: #e2e8f0;
+  border-color: #94a3b8;
+  color: #0f172a;
+}
+
+.bonsai-editor__table-panel {
+  min-width: 11.5rem;
+}
+
+.bonsai-editor__table-panel-title {
+  margin: 0 0 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #334155;
+}
+
+.bonsai-editor__table-panel-title:not(:first-child) {
+  margin-top: 0.65rem;
+  padding-top: 0.55rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.bonsai-editor__table-check {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0 0 0.45rem;
+  font-size: 0.75rem;
+  color: #475569;
+  cursor: pointer;
+}
+
+.bonsai-editor__table-insert-btn {
+  margin-bottom: 0;
+}
+
+.bonsai-editor__table-action-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.35rem;
+}
+
+.bonsai-editor__table-action {
+  appearance: none;
+  padding: 0.3rem 0.4rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.375rem;
+  background: #fff;
+  color: #0f172a;
+  font-family: inherit;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  line-height: 1.25;
+  cursor: pointer;
+  text-align: center;
+}
+
+.bonsai-editor__table-action:hover {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+}
+
+.bonsai-editor__table-action:last-child {
+  grid-column: 1 / -1;
+  color: #b91c1c;
+  border-color: #fecaca;
+  background: #fef2f2;
+}
+
+.bonsai-editor__table-action:last-child:hover {
+  background: #fee2e2;
+  border-color: #fca5a5;
+}
+
+.bonsai-editor__toolbar > .bonsai-editor__metric-control > .bonsai-editor__metric-trigger.is-active {
+  background: var(--bonsai-toolbar-active-bg, #dbeafe);
+  border-color: var(--bonsai-toolbar-active-border, #93c5fd);
+}
+
+.bonsai-editor__color-trigger {
+  position: relative;
+  flex-direction: column;
+  gap: 0.12rem;
+  padding-bottom: 0.12rem;
+  font-size: 0;
+  line-height: 0;
+  overflow: visible;
+}
+
+.bonsai-editor__color-trigger .bonsai-editor__toolbar-icon {
+  width: 1.05rem;
+  height: 1.05rem;
+}
+
+.bonsai-editor__color-trigger .bonsai-editor__toolbar-icon svg {
+  width: 1.05rem;
+  height: 1.05rem;
+}
+
+.bonsai-editor__color-indicator {
+  display: block;
+  width: 1.25rem;
+  height: 0.28rem;
+  border-radius: 1px;
+  background: #0f172a;
+  box-shadow: inset 0 0 0 1px rgb(15 23 42 / 18%);
+}
+
+.bonsai-editor__color-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 0.5rem;
+}
+
+.bonsai-editor__color-preset {
+  appearance: none;
+  width: 1.35rem;
+  height: 1.35rem;
+  padding: 0;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.bonsai-editor__color-preset:hover {
+  transform: scale(1.06);
+}
+
+.bonsai-editor__color-picker-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.45rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+.bonsai-editor__color-picker {
+  width: 2.5rem;
+  height: 2rem;
+  padding: 0;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.375rem;
+  background: #fff;
+  cursor: pointer;
+}
+
+.bonsai-editor__color-hex-row {
+  margin-bottom: 0.45rem;
+}
+
+.bonsai-editor__toolbar-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--bonsai-toolbar-icon-size);
+  height: var(--bonsai-toolbar-icon-size);
+  color: var(--bonsai-toolbar-icon-color);
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+.bonsai-editor__toolbar-icon svg {
+  width: var(--bonsai-toolbar-icon-size);
+  height: var(--bonsai-toolbar-icon-size);
+  display: block;
+  flex-shrink: 0;
+}
+
+.bonsai-editor__toolbar > button:hover:not(:disabled) {
+  background: #e5e7eb;
+  border-color: #d1d5db;
+}
+
+.bonsai-editor__toolbar > button:focus-visible {
+  outline: 2px solid var(--bonsai-focus-color);
+  outline-offset: 1px;
+}
+
+.bonsai-editor__toolbar > button.is-active {
+  background: #dbeafe;
+  border-color: #60a5fa;
+  color: #1d4ed8;
+}
+
+.bonsai-editor__toolbar > button.is-active .bonsai-editor__toolbar-icon {
+  color: #1d4ed8;
+}
+
+.bonsai-editor__toolbar > button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.bonsai-editor__toolbar-separator {
+  width: 1px;
+  background: var(--bonsai-toolbar-border);
+  margin: 0 0.25rem;
+  align-self: stretch;
+}
+
+.bonsai-editor__heading-select {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.bonsai-editor__heading-select .bonsai-editor__heading-trigger {
+  appearance: none;
+  border: 1px solid var(--bonsai-border-color);
+  background: #fff;
+  border-radius: 0.375rem;
+  height: var(--bonsai-toolbar-btn-size);
+  min-width: 8.5rem;
+  max-width: 10rem;
+  padding: 0 0.5rem 0 0.625rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.35rem;
+  cursor: pointer;
+  font-size: 0.8125rem;
+  line-height: 1.2;
+  color: var(--bonsai-text-color);
+  transition:
+    background-color 0.12s ease,
+    border-color 0.12s ease;
+}
+
+.bonsai-editor__heading-select .bonsai-editor__heading-trigger:hover {
+  background: #f9fafb;
+  border-color: #cbd5e1;
+}
+
+.bonsai-editor__heading-select .bonsai-editor__heading-trigger:focus-visible {
+  outline: 2px solid var(--bonsai-focus-color);
+  outline-offset: 1px;
+}
+
+.bonsai-editor__heading-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+.bonsai-editor__heading-chevron {
+  width: 1rem !important;
+  height: 1rem !important;
+  color: #6b7280;
+  flex-shrink: 0;
+}
+
+.bonsai-editor__heading-chevron svg {
+  width: 1rem !important;
+  height: 1rem !important;
+}
+
+.bonsai-editor__heading-menu {
+  position: absolute;
+  top: calc(100% + 0.25rem);
+  left: 0;
+  z-index: 30;
+  min-width: 12rem;
+  max-height: 16rem;
+  overflow-y: auto;
+  padding: 0.35rem;
+  background: #fff;
+  border: 1px solid var(--bonsai-border-color);
+  border-radius: 0.5rem;
+  box-shadow:
+    0 4px 6px -1px rgb(0 0 0 / 10%),
+    0 2px 4px -2px rgb(0 0 0 / 10%);
+}
+
+.bonsai-editor__heading-menu[hidden] {
+  display: none;
+}
+
+.bonsai-editor__heading-menu .bonsai-editor__heading-option {
+  appearance: none;
+  width: 100%;
+  height: auto;
+  min-height: 2rem;
+  border: none;
+  background: transparent;
+  border-radius: 0.375rem;
+  padding: 0.35rem 0.5rem;
+  text-align: left;
+  cursor: pointer;
+  color: var(--bonsai-text-color);
+  font-family: inherit;
+  font-size: inherit;
+  line-height: 1.3;
+}
+
+.bonsai-editor__heading-option:hover {
+  background: #f3f4f6;
+}
+
+.bonsai-editor__heading-option.is-active {
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+.bonsai-editor__heading-option--normal {
+  font-size: 0.875rem;
+  font-weight: 400;
+}
+
+.bonsai-editor__heading-option--h1 {
+  font-size: 1.375rem;
+  font-weight: 700;
+}
+
+.bonsai-editor__heading-option--h2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.bonsai-editor__heading-option--h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.bonsai-editor__heading-option--h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.bonsai-editor__heading-option--h5 {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.bonsai-editor__heading-option--h6 {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #4b5563;
+}
+
+.bonsai-editor__font-select {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.bonsai-editor__font-select .bonsai-editor__font-trigger {
+  appearance: none;
+  border: 1px solid var(--bonsai-border-color);
+  background: #fff;
+  border-radius: 0.375rem;
+  height: var(--bonsai-toolbar-btn-size);
+  min-width: 9rem;
+  max-width: 11rem;
+  padding: 0 0.5rem 0 0.625rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.35rem;
+  cursor: pointer;
+  font-size: 0.8125rem;
+  line-height: 1.2;
+  color: var(--bonsai-text-color);
+  transition:
+    background-color 0.12s ease,
+    border-color 0.12s ease;
+}
+
+.bonsai-editor__font-select .bonsai-editor__font-trigger:hover {
+  background: #f9fafb;
+  border-color: #cbd5e1;
+}
+
+.bonsai-editor__font-select .bonsai-editor__font-trigger:focus-visible {
+  outline: 2px solid var(--bonsai-focus-color);
+  outline-offset: 1px;
+}
+
+.bonsai-editor__font-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+.bonsai-editor__font-chevron {
+  width: 1rem !important;
+  height: 1rem !important;
+  color: #6b7280;
+  flex-shrink: 0;
+}
+
+.bonsai-editor__font-chevron svg {
+  width: 1rem !important;
+  height: 1rem !important;
+}
+
+.bonsai-editor__font-menu {
+  position: absolute;
+  top: calc(100% + 0.25rem);
+  left: 0;
+  z-index: 30;
+  min-width: 13rem;
+  max-height: 16rem;
+  overflow-y: auto;
+  padding: 0.35rem;
+  background: #fff;
+  border: 1px solid var(--bonsai-border-color);
+  border-radius: 0.5rem;
+  box-shadow:
+    0 4px 6px -1px rgb(0 0 0 / 10%),
+    0 2px 4px -2px rgb(0 0 0 / 10%);
+}
+
+.bonsai-editor__font-menu[hidden] {
+  display: none;
+}
+
+.bonsai-editor__font-menu .bonsai-editor__font-option {
+  appearance: none;
+  width: 100%;
+  height: auto;
+  min-height: 2rem;
+  border: none;
+  background: transparent;
+  border-radius: 0.375rem;
+  padding: 0.35rem 0.5rem;
+  text-align: left;
+  cursor: pointer;
+  color: var(--bonsai-text-color);
+  font-size: 0.9375rem;
+  line-height: 1.3;
+}
+
+.bonsai-editor__font-option:hover {
+  background: #f3f4f6;
+}
+
+.bonsai-editor__font-option.is-active {
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+.bonsai-editor__prosemirror img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.375rem;
+}
+
+.bonsai-editor__prosemirror [data-youtube-video],
+.bonsai-editor__prosemirror .bonsai-media-embed {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  margin: 0.75rem 0;
+  aspect-ratio: 16 / 9;
+  border-radius: 0.375rem;
+  overflow: hidden;
+  background: #0f172a;
+}
+
+.bonsai-editor__prosemirror [data-youtube-video] iframe,
+.bonsai-editor__prosemirror .bonsai-media-embed__frame {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.bonsai-editor__prosemirror .bonsai-media-video {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  margin: 0.75rem 0;
+  border-radius: 0.375rem;
+  background: #000;
+}
+
+.bonsai-editor__prosemirror .bonsai-media-audio {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  margin: 0.75rem 0;
+}
+
+.bonsai-editor__media-panel {
+  min-width: 14rem;
+}
+
+.bonsai-editor__media-hint {
+  margin: 0 0 0.45rem;
+  font-size: 0.6875rem;
+  line-height: 1.35;
+  color: #64748b;
+}
+
+.bonsai-editor__file-manager-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10050;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgb(15 23 42 / 45%);
+}
+
+.bonsai-editor__file-manager-overlay[hidden] {
+  display: none;
+}
+
+.bonsai-editor__file-manager-overlay.is-file-manager-fullscreen {
+  padding: 0;
+  align-items: stretch;
+  justify-content: stretch;
+}
+
+.bonsai-editor:fullscreen .bonsai-editor__file-manager-overlay,
+.bonsai-editor.bonsai-editor--fullscreen .bonsai-editor__file-manager-overlay {
+  position: fixed;
+}
+
+.bonsai-editor__file-manager-dialog {
+  width: min(640px, 100%);
+  max-height: min(85vh, 720px);
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 0.75rem;
+  box-shadow:
+    0 25px 50px -12px rgb(0 0 0 / 25%),
+    0 0 0 1px rgb(0 0 0 / 5%);
+  color: var(--bonsai-text-color, #0f172a);
+}
+
+.bonsai-editor__file-manager-dialog--nc {
+  width: min(1180px, 96vw);
+  height: min(820px, 92vh);
+  max-height: 92vh;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.bonsai-editor__file-manager-dialog--floating {
+  position: fixed;
+  margin: 0;
+  z-index: 10051;
+}
+
+.bonsai-editor__file-manager-dialog--fullscreen {
+  position: fixed;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  margin: 0;
+  border-radius: 0;
+  z-index: 10051;
+}
+
+.bonsai-editor__file-manager-dialog--fullscreen .bonsai-editor__file-manager-drag-hint {
+  display: none;
+}
+
+.bonsai-editor__file-manager-dialog--fullscreen .bonsai-editor__file-manager-header {
+  cursor: default;
+}
+
+.bonsai-editor__file-manager-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--bonsai-border-color, #e2e8f0);
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+}
+
+.bonsai-editor__file-manager-dialog.is-dragging .bonsai-editor__file-manager-header {
+  cursor: grabbing;
+}
+
+.bonsai-editor__file-manager-title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.bonsai-editor__file-manager-drag-hint {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #64748b;
+}
+
+.bonsai-editor__file-manager-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex-shrink: 0;
+}
+
+.bonsai-editor__file-manager-fullscreen,
+.bonsai-editor__file-manager-close {
+  appearance: none;
+  border: none;
+  background: transparent;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.375rem;
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+  color: #64748b;
+}
+
+.bonsai-editor__file-manager-fullscreen {
+  font-size: 1.15rem;
+}
+
+.bonsai-editor__file-manager-fullscreen:hover,
+.bonsai-editor__file-manager-close:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.bonsai-editor__file-manager-commandbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  padding: 0.55rem 0.75rem;
+  border-bottom: 1px solid #e2e8f0;
+  background: #f8fafc;
+}
+
+.bonsai-editor__fm-btn {
+  appearance: none;
+  border: 1px solid #cbd5e1;
+  background: #fff;
+  border-radius: 0.375rem;
+  padding: 0.35rem 0.65rem;
+  font-size: 0.8125rem;
+  cursor: pointer;
+  color: #0f172a;
+}
+
+.bonsai-editor__fm-btn:hover:not(:disabled) {
+  background: #f1f5f9;
+}
+
+.bonsai-editor__fm-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.bonsai-editor__fm-btn--primary {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: #fff;
+}
+
+.bonsai-editor__fm-btn--danger {
+  border-color: #fecaca;
+  color: #b91c1c;
+}
+
+.bonsai-editor__file-manager-path {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.15rem;
+  padding: 0.45rem 0.75rem;
+  font-size: 0.8125rem;
+  border-bottom: 1px solid #e2e8f0;
+  background: #fff;
+}
+
+.bonsai-editor__file-manager-path-label,
+.bonsai-editor__file-manager-path-sep {
+  color: #64748b;
+}
+
+.bonsai-editor__file-manager-path-part {
+  appearance: none;
+  border: none;
+  background: transparent;
+  padding: 0.1rem 0.25rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  font: inherit;
+  color: #1d4ed8;
+}
+
+.bonsai-editor__file-manager-path-part:hover {
+  background: #eff6ff;
+}
+
+.bonsai-editor__file-manager-main {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+
+.bonsai-editor__file-manager-panels {
+  flex: 1;
+  min-height: 12rem;
+  display: grid;
+  grid-template-columns: 1fr 1.35fr;
+  gap: 0.5rem;
+  padding: 0.65rem 0.75rem 0.35rem;
+}
+
+.bonsai-editor__file-manager-panel {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  border: 2px solid #e2e8f0;
+  border-radius: 0.5rem;
+  background: #fcfcfd;
+  overflow: hidden;
+}
+
+.bonsai-editor__file-manager-panel.is-active {
+  border-color: #60a5fa;
+  box-shadow: inset 0 0 0 1px #bfdbfe;
+}
+
+.bonsai-editor__file-manager-panel > header {
+  padding: 0.35rem 0.55rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #475569;
+  background: #eef2f7;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.bonsai-editor__file-manager-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.bonsai-editor__file-manager-panel-title {
+  flex-shrink: 0;
+}
+
+.bonsai-editor__file-manager-search {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 8rem;
+  max-width: 16rem;
+  margin-left: auto;
+}
+
+.bonsai-editor__file-manager-search-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.bonsai-editor__file-manager-search-input {
+  width: 100%;
+  padding: 0.3rem 0.5rem;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  letter-spacing: normal;
+  text-transform: none;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.375rem;
+  background: #fff;
+  color: #0f172a;
+}
+
+.bonsai-editor__file-manager-search-input:focus {
+  outline: 2px solid #93c5fd;
+  outline-offset: 0;
+  border-color: #60a5fa;
+}
+
+.bonsai-editor__file-manager-search-input::-webkit-search-cancel-button {
+  cursor: pointer;
+}
+
+.bonsai-editor__file-manager-table-wrap {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+}
+
+.bonsai-editor__file-manager-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+}
+
+.bonsai-editor__file-manager-table thead {
+  position: sticky;
+  top: 0;
+  background: #f8fafc;
+  z-index: 1;
+}
+
+.bonsai-editor__file-manager-table th,
+.bonsai-editor__file-manager-table td {
+  padding: 0.35rem 0.55rem;
+  text-align: left;
+  border-bottom: 1px solid #eef2f7;
+}
+
+.bonsai-editor__file-manager-th-preview {
+  width: 4.5rem;
+}
+
+.bonsai-editor__file-manager-sort {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  font-weight: 700;
+  color: inherit;
+  cursor: pointer;
+  border-radius: 0.25rem;
+}
+
+.bonsai-editor__file-manager-sort:hover {
+  color: #2563eb;
+}
+
+.bonsai-editor__file-manager-sort.is-active {
+  color: #1d4ed8;
+}
+
+.bonsai-editor__file-manager-sort:focus-visible {
+  outline: 2px solid #93c5fd;
+  outline-offset: 2px;
+}
+
+.bonsai-editor__file-manager-table tbody tr {
+  cursor: pointer;
+}
+
+.bonsai-editor__file-manager-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+.bonsai-editor__file-manager-table tbody tr.is-selected {
+  background: #dbeafe;
+}
+
+.bonsai-editor__file-manager-table tbody tr.is-batch-selected {
+  background: #eff6ff;
+}
+
+.bonsai-editor__file-manager-table tbody tr.is-selected.is-batch-selected {
+  background: #bfdbfe;
+}
+
+.bonsai-editor__file-manager-th-actions {
+  width: 5.5rem;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.bonsai-editor__file-manager-file-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  white-space: nowrap;
+}
+
+.bonsai-editor__file-manager-file-check-label {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.bonsai-editor__file-manager-file-check {
+  width: 1rem;
+  height: 1rem;
+  margin: 0;
+  cursor: pointer;
+  accent-color: #2563eb;
+}
+
+.bonsai-editor__file-manager-file-delete {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.65rem;
+  height: 1.65rem;
+  padding: 0;
+  border: 1px solid #fecaca;
+  border-radius: 0.375rem;
+  background: #fff;
+  color: #dc2626;
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.bonsai-editor__file-manager-file-delete:hover {
+  background: #fef2f2;
+  border-color: #f87171;
+}
+
+.bonsai-editor__file-manager-empty-row {
+  color: #64748b;
+  font-style: italic;
+}
+
+.bonsai-editor__file-manager-preview-cell {
+  width: 4.5rem;
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
+  vertical-align: middle;
+}
+
+.bonsai-editor__file-manager-thumb {
+  display: block;
+  width: 3.25rem;
+  height: 3.25rem;
+  object-fit: cover;
+  border-radius: 0.375rem;
+  border: 1px solid #e2e8f0;
+  background: #f1f5f9;
+}
+
+.bonsai-editor__file-manager-table tbody tr.is-selected .bonsai-editor__file-manager-thumb {
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 2px rgb(96 165 250 / 35%);
+}
+
+.bonsai-editor__file-manager-table tbody tr.is-image.is-selected .bonsai-editor__file-manager-thumb {
+  width: 3.75rem;
+  height: 3.75rem;
+}
+
+.bonsai-editor__file-manager-thumb-placeholder {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 0.375rem;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.bonsai-editor__file-manager-name-cell {
+  font-weight: 500;
+  word-break: break-word;
+}
+
+.bonsai-editor__file-manager-details {
+  flex-shrink: 0;
+  margin: 0 0.75rem 0.35rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  background: #f8fafc;
+  max-height: 13rem;
+  overflow: auto;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.bonsai-editor__file-manager-details.is-revealed {
+  border-color: #60a5fa;
+  box-shadow:
+    0 0 0 2px rgb(96 165 250 / 35%),
+    0 4px 12px rgb(37 99 235 / 12%);
+}
+
+.bonsai-editor__file-manager-details-header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  padding: 0.3rem 0.55rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #475569;
+  background: #eef2f7;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.bonsai-editor__file-manager-details-body {
+  padding: 0.45rem 0.55rem 0.55rem;
+}
+
+.bonsai-editor__file-manager-details-empty {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: #64748b;
+  font-style: italic;
+}
+
+.bonsai-editor__file-manager-details-preview {
+  margin-bottom: 0.45rem;
+}
+
+.bonsai-editor__file-manager-details-preview img {
+  display: block;
+  max-width: 8rem;
+  max-height: 5rem;
+  object-fit: contain;
+  border-radius: 0.375rem;
+  border: 1px solid #e2e8f0;
+  background: #fff;
+}
+
+.bonsai-editor__file-manager-meta-dl {
+  display: grid;
+  grid-template-columns: minmax(5.5rem, auto) 1fr;
+  gap: 0.25rem 0.75rem;
+  margin: 0;
+  font-size: 0.8125rem;
+}
+
+.bonsai-editor__file-manager-meta-dl dt {
+  margin: 0;
+  font-weight: 600;
+  color: #475569;
+}
+
+.bonsai-editor__file-manager-meta-dl dd {
+  margin: 0;
+  color: #0f172a;
+  word-break: break-word;
+}
+
+.bonsai-editor__file-manager-meta-dl dd.is-mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.75rem;
+}
+
+.bonsai-editor__file-manager-meta-link {
+  color: #2563eb;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.bonsai-editor__file-manager-upload {
+  padding: 0.45rem 0.75rem 0.65rem;
+  border-top: 1px solid #e2e8f0;
+  background: #fafafa;
+}
+
+.bonsai-editor__file-manager-status {
+  margin: 0.5rem 0 0;
+  font-size: 0.8125rem;
+  color: #2563eb;
+  font-weight: 500;
+}
+
+.bonsai-editor__file-manager-item.is-remote {
+  border-color: #bfdbfe;
+}
+
+.bonsai-editor__file-manager-upload-text {
+  margin: 0 0 0.5rem;
+  font-size: 0.875rem;
+  color: #64748b;
+}
+
+.bonsai-editor__file-manager-upload-btn {
+  appearance: none;
+  border: 1px solid #cbd5e1;
+  background: #fff;
+  border-radius: 0.375rem;
+  padding: 0.4rem 0.85rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.bonsai-editor__file-manager-upload-btn:hover {
+  background: #f8fafc;
+}
+
+.bonsai-editor__file-manager-hint,
+.bonsai-editor__file-manager-empty {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: #64748b;
+}
+
+.bonsai-editor__file-manager-error {
+  margin: 0.5rem 0 0;
+  font-size: 0.8125rem;
+  color: #b91c1c;
+}
+
+.bonsai-editor__file-manager-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.bonsai-editor__file-manager-filters {
+  display: inline-flex;
+  gap: 0.25rem;
+  padding: 0.2rem;
+  background: #f1f5f9;
+  border-radius: 0.5rem;
+}
+
+.bonsai-editor__file-manager-filters button {
+  appearance: none;
+  border: none;
+  background: transparent;
+  border-radius: 0.375rem;
+  padding: 0.3rem 0.65rem;
+  font-size: 0.8125rem;
+  cursor: pointer;
+  color: #475569;
+}
+
+.bonsai-editor__file-manager-filters button.is-active,
+.bonsai-editor__file-manager-filters button[aria-selected='true'] {
+  background: #fff;
+  color: #1d4ed8;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 6%);
+}
+
+.bonsai-editor__file-manager-insert {
+  appearance: none;
+  border: none;
+  border-radius: 0.375rem;
+  padding: 0.4rem 0.85rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  background: #2563eb;
+  color: #fff;
+}
+
+.bonsai-editor__file-manager-insert:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.bonsai-editor__file-manager-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.bonsai-editor__file-manager-item {
+  display: grid;
+  grid-template-columns: 3.5rem 1fr auto;
+  gap: 0.65rem;
+  align-items: center;
+  padding: 0.5rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.bonsai-editor__file-manager-item.is-selected {
+  border-color: #60a5fa;
+  background: #eff6ff;
+}
+
+.bonsai-editor__file-manager-preview {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 0.375rem;
+  background: #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #64748b;
+}
+
+.bonsai-editor__file-manager-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bonsai-editor__file-manager-meta {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.bonsai-editor__file-manager-name {
+  font-size: 0.875rem;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bonsai-editor__file-manager-size {
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+.bonsai-editor__file-manager-item-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  justify-content: flex-end;
+}
+
+.bonsai-editor__file-manager-item-actions button {
+  appearance: none;
+  border: 1px solid #cbd5e1;
+  background: #fff;
+  border-radius: 0.375rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.bonsai-editor__file-manager-item-actions button.is-danger {
+  border-color: #fecaca;
+  color: #b91c1c;
+}
+
+.bonsai-editor__file-manager-empty[hidden] {
+  display: none;
+}

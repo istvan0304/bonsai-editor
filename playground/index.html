@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="hu">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bonsai Editor – Dev</title>
+  </head>
+  <body>
+    <h1>Bonsai Editor (ES modul)</h1>
+    <div id="editor-html"></div>
+    <pre id="output-html"></pre>
+
+    <h2>JSON kimenet</h2>
+    <div id="editor-json"></div>
+    <pre id="output-json"></pre>
+
+    <h2>Web Component</h2>
+    <bonsai-editor id="wc" toolbar placeholder="Írj ide..."></bonsai-editor>
+
+    <script type="module">
+      import { BonsaiEditor } from 'bonsai-editor'
+      import 'bonsai-editor/style.css'
+      import 'bonsai-editor/element'
+
+      const outHtml = document.querySelector('#output-html')
+      new BonsaiEditor({
+        element: document.querySelector('#editor-html'),
+        content: '<p>Kezdeti <strong>HTML</strong> tartalom</p>',
+        toolbar: true,
+        placeholder: 'Kezdj el írni...',
+        onUpdate: (html) => {
+          outHtml.textContent = html
+        },
+      })
+
+      const outJson = document.querySelector('#output-json')
+      new BonsaiEditor({
+        element: document.querySelector('#editor-json'),
+        outputFormat: 'json',
+        content: '<p>JSON mód</p>',
+        onUpdate: (doc) => {
+          outJson.textContent = JSON.stringify(doc, null, 2)
+        },
+      })
+
+      document.querySelector('#wc').addEventListener('bonsai-update', (e) => {
+        console.log('WC update', e.detail.value)
+      })
+    </script>
+  </body>
+</html>
