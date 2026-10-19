@@ -6,7 +6,7 @@ import TextAlign from '@tiptap/extension-text-align'
 import { BackgroundColor, Color, FontFamily, LineHeight, TextStyle } from '@tiptap/extension-text-style'
 import { LetterSpacing } from './letter-spacing-extension.js'
 import { TextIndent } from './text-indent-extension.js'
-import Image from '@tiptap/extension-image'
+import { BonsaiImage } from './image-extension.js'
 import { TableKit } from '@tiptap/extension-table'
 import Youtube from '@tiptap/extension-youtube'
 import { MediaAudio, MediaEmbed, MediaVideo } from './media-nodes-extension.js'
@@ -60,9 +60,18 @@ export function createExtensions(features = {}, options = {}) {
     LetterSpacing,
     LineHeight,
     TextIndent,
-    Image.configure({
+    BonsaiImage.configure({
       inline: false,
       allowBase64: true,
+      HTMLAttributes: {
+        class: 'bonsai-editor__image',
+      },
+      resize: {
+        enabled: true,
+        minWidth: 48,
+        minHeight: 48,
+        alwaysPreserveAspectRatio: true,
+      },
     }),
     TableKit.configure({
       table: { resizable: true },

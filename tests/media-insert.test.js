@@ -27,6 +27,26 @@ describe('insert media', () => {
     expect(html).toMatch(/alt="Teszt kép"/)
   })
 
+  it('persists image dimensions in html', () => {
+    const element = document.createElement('div')
+    document.body.appendChild(element)
+    const editor = new BonsaiEditor({
+      element,
+      content: '<p></p>',
+    })
+    editors.push(editor)
+
+    editor.tiptap
+      .chain()
+      .focus()
+      .setImage({ src: 'https://example.com/sized.jpg', width: 320, height: 180 })
+      .run()
+
+    const html = editor.getHTML()
+    expect(html).toMatch(/width="320"/)
+    expect(html).toMatch(/height="180"/)
+  })
+
   it('inserts youtube embed', () => {
     const element = document.createElement('div')
     document.body.appendChild(element)

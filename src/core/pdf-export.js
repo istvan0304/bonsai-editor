@@ -63,6 +63,21 @@ const PDF_BODY_STYLES = `
   max-width: 100%;
   height: auto;
 }
+.bonsai-pdf-body img[data-align='right'] {
+  float: right;
+  margin: 0.25rem 0 0.75rem 0.75rem;
+}
+.bonsai-pdf-body img[data-align='center'] {
+  display: block;
+  float: none;
+  clear: both;
+  margin: 0.75rem auto;
+}
+.bonsai-pdf-body img[data-align='left'],
+.bonsai-pdf-body img:not([data-align]) {
+  float: left;
+  margin: 0.25rem 0.75rem 0.75rem 0;
+}
 .bonsai-pdf-body a { color: #2563eb; text-decoration: underline; }
 @media print {
   body { margin: 0; padding: 12mm 14mm; }

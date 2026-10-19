@@ -1,5 +1,5 @@
 import { HEADING_LABELS } from './heading-levels.js'
-import { getTextAlign } from '../core/text-align.js'
+import { applyBlockOrImageAlign, isBlockOrImageAlignActive } from '../core/image-align.js'
 
 /**
  * @typedef {import('../core/editor.js').BonsaiEditor} BonsaiEditor
@@ -65,23 +65,31 @@ export const EDITOR_ACTIONS = {
   },
   alignLeft: {
     label: 'Balra igazítás',
-    run: (e) => e.tiptap.chain().focus().setTextAlign('left').run(),
-    isActive: (e) => getTextAlign(e.tiptap) === 'left',
+    run: (e) => {
+      applyBlockOrImageAlign(e.tiptap, 'left')
+    },
+    isActive: (e) => isBlockOrImageAlignActive(e.tiptap, 'left'),
   },
   alignCenter: {
     label: 'Középre igazítás',
-    run: (e) => e.tiptap.chain().focus().setTextAlign('center').run(),
-    isActive: (e) => getTextAlign(e.tiptap) === 'center',
+    run: (e) => {
+      applyBlockOrImageAlign(e.tiptap, 'center')
+    },
+    isActive: (e) => isBlockOrImageAlignActive(e.tiptap, 'center'),
   },
   alignRight: {
     label: 'Jobbra igazítás',
-    run: (e) => e.tiptap.chain().focus().setTextAlign('right').run(),
-    isActive: (e) => getTextAlign(e.tiptap) === 'right',
+    run: (e) => {
+      applyBlockOrImageAlign(e.tiptap, 'right')
+    },
+    isActive: (e) => isBlockOrImageAlignActive(e.tiptap, 'right'),
   },
   alignJustify: {
     label: 'Sorkizárás',
-    run: (e) => e.tiptap.chain().focus().setTextAlign('justify').run(),
-    isActive: (e) => getTextAlign(e.tiptap) === 'justify',
+    run: (e) => {
+      applyBlockOrImageAlign(e.tiptap, 'justify')
+    },
+    isActive: (e) => isBlockOrImageAlignActive(e.tiptap, 'justify'),
   },
   sourceCode: {
     label: 'Forráskód',
