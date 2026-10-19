@@ -1,6 +1,6 @@
 {
   "name": "bonsai-editor",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Modular, framework-agnostic rich text editor built on TipTap",
   "type": "module",
   "license": "MIT",
@@ -43,6 +43,7 @@
     "build:types": "tsc -p tsconfig.types.json",
     "test": "vitest run",
     "verify": "node scripts/verify-package.mjs",
+    "prepublishOnly": "npm run ci",
     "ci": "npm run lint && npm test && npm run build && npm run verify",
     "lint": "eslint src tests"
   },

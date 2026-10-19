@@ -36,6 +36,16 @@ if (/\bvue\b/i.test(coreJs) && /from ['"]vue['"]/.test(coreJs)) {
   failed = true
 }
 
+const coreCss = readFileSync(join(root, 'dist/bonsai-editor.css'), 'utf8')
+if (!coreCss.includes('[data-resize-handle]')) {
+  console.error('dist/bonsai-editor.css is missing resizable image styles (run npm run build)')
+  failed = true
+}
+if (!coreJs.includes('alwaysPreserveAspectRatio')) {
+  console.error('dist/bonsai-editor.js is missing image resize config (run npm run build)')
+  failed = true
+}
+
 try {
   execSync('npm pack --dry-run', { cwd: root, stdio: 'pipe' })
 } catch (e) {
