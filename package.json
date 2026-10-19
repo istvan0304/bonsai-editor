@@ -1,6 +1,6 @@
 {
   "name": "bonsai-editor",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Modular, framework-agnostic rich text editor built on TipTap",
   "type": "module",
   "license": "MIT",
